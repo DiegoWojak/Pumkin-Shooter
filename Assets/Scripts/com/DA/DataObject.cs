@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.com.DA
 {
-    [CreateAssetMenu(menuName = "Data/AccessDataObject")]
-    public class DataObject : ScriptableObject
+    //[CreateAssetMenu(menuName = "Data/AccessDataObject")]
+    public abstract class DataObject : ScriptableObject
     {
         public string Name => _name;
         [SerializeField] private string _name; 

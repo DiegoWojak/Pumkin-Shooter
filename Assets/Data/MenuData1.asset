@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b81a63efd62bd4bb900bf3bd93eb05, type: 3}
-  m_Name: data1
+  m_Script: {fileID: 11500000, guid: 37e1c25f39f834544b3a4624ebbf1ec8, type: 3}
+  m_Name: MenuData1
   m_EditorClassIdentifier: 
-  _name: data2
+  _name: Menu1
+  _title: Pumkin Shooter
+  _version: 0.91
+  _highscoreTitle: HighScore Title
+  _buttonName: Start
