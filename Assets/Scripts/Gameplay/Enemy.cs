@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     [Header("Physics")]
     [SerializeField] private Rigidbody _rigidBody = null;
 
+    public System.Action OnDieCallback;
+    
     private Vector3 _startPosition = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -38,8 +40,12 @@ public class Enemy : MonoBehaviour
     {
         if( collision.gameObject.GetComponent<Cannonball>() )
         {
+            Destroy(collision.gameObject);
             _rigidBody.AddForceAtPosition(collision.transform.forward, collision.GetContact(0).point, ForceMode.Impulse);
             Die();
+            OnDieCallback?.Invoke();
         }
     }
+
+    
 }

@@ -1,13 +1,21 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.com.DA;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
+    public static GameSession Instance;
+
     public System.Action OnSessionStart;
     public System.Action OnSessionEnd;
 
-    public float timeLeft = 0;
+    [HideInInspector]public float timeLeft = 0;
+
+    [SerializeField]public GameSessionData GameSessionData;
+
+    [SerializeField]public List<SpammerData> spamer;
+
 
     public enum SessionState
     {
@@ -18,9 +26,17 @@ public class GameSession : MonoBehaviour
 
     private SessionState _state = SessionState.Paused;
 
+    private void Awake()
+    {
+        Instance = this;
+        UpdateSpamers();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        timeLeft = GameSessionData.TimeLenght;
+        
         StartSession();
     }
 
@@ -56,5 +72,24 @@ public class GameSession : MonoBehaviour
         {
             OnSessionEnd();
         }
+    }
+
+    void UpdateSpamers() {
+        int spm = GameSessionData.SpamPumkins;
+        for (int i = 0; i < spamer.Count; i++)
+        {
+            if (spm > 0)
+                spm--;
+            else { 
+                spamer[i].spamer.SetActive(false);
+                spamer[i].spamer.GetComponent<EnemySpawner>().points = spamer[i].points;
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class SpammerData {
+        public GameObject spamer;
+        public int points;
     }
 }

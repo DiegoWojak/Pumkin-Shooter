@@ -14,17 +14,25 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float _rateOfFire = 0.33f;
 
     private float _timeOfLastFire = 0.0f;
-    
 
+    private bool _isMoving = false;
+
+    List<Vector3> points;
     // Start is called before the first frame update
     void Start()
     {
         FindObjectOfType<GameSession>().OnSessionEnd += () => { enabled = false; };
+        points = new List<Vector3>();
+        foreach (var sp in GameSession.Instance.spamer) {
+            points.Add(sp.spamer.transform.position);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (_isMoving)  return;
+
         if( Input.GetKeyDown( KeyCode.Space ) )
         {
             FireCannon();
@@ -39,6 +47,29 @@ public class Cannon : MonoBehaviour
         {
             _cannonTransform.Rotate( 0.0f, Time.deltaTime * _rotationRate, 0.0f, Space.World );
         }
+
+        if (Input.GetKey(KeyCode.Alpha1) && points.Count>=1) {
+            Debug.Log("asdads");
+            RotateTowards(-40f);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2) && points.Count >= 2)
+        {
+            RotateTowards(-10);
+        }
+        if (Input.GetKey(KeyCode.Alpha3) && points.Count >= 3)
+        {
+            RotateTowards(50);
+        }
+
+
+    }
+
+    public void RotateTowards(float target) {
+        _isMoving = true;
+        Debug.Log(target);
+        _cannonTransform.rotation = Quaternion.Euler(-15, target,0);
+        _isMoving = false;
     }
 
     public void FireCannon()
@@ -51,4 +82,5 @@ public class Cannon : MonoBehaviour
             _timeOfLastFire = Time.timeSinceLevelLoad;
         }
     }
+
 }

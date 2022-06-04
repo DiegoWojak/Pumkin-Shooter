@@ -44,3 +44,43 @@ Edited Script:
             In case not MenuData created and assigned, it will load DefaultData on Run
 
     Added   UpdateButtonAction Method -> Asssign LoadScene to GameScene
+
+
+## GameScene:
+## 1:
+Edited Script:
+    name "EnemySpawner"
+
+#Changes
+    Added   variables _spamDelay, points;
+    Added   Respawn IEnumerator for respawn function
+    Added   OnDieCallback for execution Callback.
+    Added   GainPoints to increase points for different Pumkin
+    Added   HUD references.
+Edited Script:
+    name "Enemy"
+#Changes
+    Added   variable Action OnDieCallback for callback and Execution OnDieCallback?.Invoke();
+
+
+## 2:
+    Added Script
+        name: "GameSessionData" 
+        type: ScriptableObject
+    Edited GameSession
+    #Changes
+        Added Singleton patter to be used with GameSessionData and other variables
+        Added method UpdateSpamer for Spammer player
+        Added Spammer Data for Utilities
+    Added
+        Functionalities 
+            PlayAgainButton PlayAgain Button
+            ReturnToMenuButton Reset Button
+
+## 3 Polish tasks
+    Edited Script
+        Name: Cannon
+        Type: Mono
+    #Chanbges
+        Added Rotate Towards
+
