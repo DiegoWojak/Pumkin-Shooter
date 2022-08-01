@@ -1,4 +1,4 @@
-# Left Field Labs: Unity Engineer Take Home
+# Unity Engineer Take Home
 
 ## Pumpkin Shooter
 
